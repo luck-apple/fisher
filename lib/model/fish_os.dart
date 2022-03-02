@@ -1,0 +1,1 @@
+enum FishOS { windows, macos }
