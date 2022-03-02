@@ -66,8 +66,7 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget _startButton() {
     return MaterialButton(
       onPressed: () {
-        Navigator.pushReplacement(
-            context, routeBuilder(target: const HomePage()));
+        Navigator.pushReplacement(context, routeBuilder(const HomePage()));
       },
       textColor: Colors.white,
       shape: Border.all(

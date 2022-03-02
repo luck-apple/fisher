@@ -1,3 +1,4 @@
+import 'package:fisher/global_settings.dart';
 import 'package:fisher/util/device_wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class FishMacOSPage extends StatefulWidget {
 class _FishMacOSPageState extends State<FishMacOSPage>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 10),
+    duration: Duration(minutes: getFishDuration()),
     vsync: this,
   );
 

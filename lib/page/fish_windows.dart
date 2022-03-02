@@ -1,3 +1,4 @@
+import 'package:fisher/global_settings.dart';
 import 'package:fisher/util/device_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -14,7 +15,7 @@ class _FishWindowsPageState extends State<FishWindowsPage>
   final _textStyle = const TextStyle(color: Colors.white, fontSize: 22);
 
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 10),
+    duration: Duration(minutes: getFishDuration()),
     vsync: this,
   );
 

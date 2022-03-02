@@ -1,12 +1,24 @@
+import 'package:fisher/global_settings.dart';
 import 'package:fisher/page/welcome_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const FisherApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class FisherApp extends StatefulWidget {
+  const FisherApp({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _FisherApp();
+}
+
+class _FisherApp extends State<FisherApp> {
+  @override
+  void initState() {
+    super.initState();
+    initGlobalSettings();
+  }
 
   @override
   Widget build(BuildContext context) {
