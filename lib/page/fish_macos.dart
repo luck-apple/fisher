@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:desktop_window/desktop_window.dart';
+import 'package:fisher/util/device_wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +11,6 @@ class FishMacOSPage extends StatefulWidget {
 
 class _FishMacOSPageState extends State<FishMacOSPage>
     with SingleTickerProviderStateMixin {
-  // desktop_window support platform: Linux, MacOS, Windows
-  final bool _isFullscreen =
-      Platform.isMacOS || Platform.isWindows || Platform.isLinux;
-
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 10),
     vsync: this,
@@ -25,11 +19,7 @@ class _FishMacOSPageState extends State<FishMacOSPage>
   @override
   void initState() {
     super.initState();
-    if (_isFullscreen) {
-      DesktopWindow.setFullScreen(true).then((_) => _startAnimation());
-    } else {
-      _startAnimation();
-    }
+    DeviceWrapper.setFullScreen(true, block: () => _startAnimation());
   }
 
   @override
@@ -89,10 +79,6 @@ class _FishMacOSPageState extends State<FishMacOSPage>
   }
 
   void _onFishTouchEnd() {
-    if (_isFullscreen) {
-      DesktopWindow.setFullScreen(false).then((_) => Navigator.pop(context));
-    } else {
-      Navigator.pop(context);
-    }
+    DeviceWrapper.setFullScreen(false, block: () => Navigator.pop(context));
   }
 }

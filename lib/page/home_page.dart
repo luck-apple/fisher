@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:fisher/model/fish_os.dart';
 import 'package:fisher/page/fish_macos.dart';
+import 'package:fisher/page/fish_windows.dart';
 import 'package:fisher/util/route_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -26,9 +27,9 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 20),
             const Text(
               '请选择系统:',
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: TextStyle(color: Colors.white, fontSize: 18),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
             _checkableItem(_fishOS == FishOS.macos, "MacOS", (checked) {
               if (checked != null && checked) {
                 setState(() {
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> {
                 });
               }
             }),
+            const SizedBox(height: 20),
             const SizedBox(height: 40),
             ElevatedButton(
               child: const Padding(
@@ -77,12 +79,12 @@ class _HomePageState extends State<HomePage> {
               onChanged: onCheckChanged,
               side: const BorderSide(color: Colors.white70, width: 2),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 12),
             Text(
               title,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 16,
               ),
             ),
           ],
@@ -95,7 +97,7 @@ class _HomePageState extends State<HomePage> {
     if (_fishOS == FishOS.macos) {
       Navigator.push(context, routeBuilder(target: const FishMacOSPage()));
     } else if (_fishOS == FishOS.windows) {
-      print('windows');
+      Navigator.push(context, routeBuilder(target: const FishWindowsPage()));
     }
   }
 }
