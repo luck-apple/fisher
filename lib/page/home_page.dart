@@ -4,6 +4,7 @@ import 'package:fisher/model/fish_os.dart';
 import 'package:fisher/page/fish_macos.dart';
 import 'package:fisher/page/fish_windows.dart';
 import 'package:fisher/util/route_utils.dart';
+import 'package:fisher/util/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                child: Text('进入摸鱼状态'),
+                child: Text('开始摸鱼'),
               ),
               onPressed: _startTouchFish,
             )
@@ -121,14 +122,19 @@ class _HomePageState extends State<HomePage> {
       children: [
         SizedBox(
           width: 70,
-          height: 38,
+          height: 34,
           child: TextField(
             controller: _durationController,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(
+              color: Colors.white,
+              height: 1.4,
+              fontSize: 16,
+            ),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.done,
             decoration: InputDecoration(
+              contentPadding: const EdgeInsets.all(0),
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white70),
               ),
@@ -155,16 +161,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _startTouchFish() {
-    try {
-      int minutes = int.parse(_durationController.text);
-      if (_fishOS == FishOS.macos) {
-        Navigator.push(context, routeBuilder(const FishMacOSPage()));
-      } else if (_fishOS == FishOS.windows) {
-        Navigator.push(context, routeBuilder(const FishWindowsPage()));
-      }
-      setFishDuration(minutes);
-    } catch (e) {
-      print('start fish error: $e');
+    if (_durationController.text.isEmpty) {
+      Toaster.show('请输入摸鱼时长', context, gravity: Toaster.center);
+      return;
     }
+
+    int minutes = int.parse(_durationController.text);
+    if (minutes < 1) {
+      Toaster.show('摸鱼时长最低1分钟', context, gravity: Toaster.center);
+      return;
+    }
+
+    if (_fishOS == FishOS.macos) {
+      Navigator.push(context, routeBuilder(const FishMacOSPage()));
+    } else if (_fishOS == FishOS.windows) {
+      Navigator.push(context, routeBuilder(const FishWindowsPage()));
+    }
+    setFishDuration(minutes);
   }
 }

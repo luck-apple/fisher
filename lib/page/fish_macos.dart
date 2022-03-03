@@ -57,19 +57,25 @@ class _FishMacOSPageState extends State<FishMacOSPage>
             Container(
               width: 200,
               padding: const EdgeInsets.only(top: 45),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(2.5),
-                child: AnimatedBuilder(
-                  animation: _controller,
-                  builder: (_, __) {
-                    return LinearProgressIndicator(
-                      value: _controller.value,
-                      backgroundColor:
-                          CupertinoColors.lightBackgroundGray.withOpacity(0.3),
-                      color: CupertinoColors.white,
-                      minHeight: 5,
-                    );
-                  },
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: Border.all(color: CupertinoColors.systemGrey),
+                  borderRadius: BorderRadius.circular(2.5),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(2.5),
+                  child: AnimatedBuilder(
+                    animation: _controller,
+                    builder: (_, __) {
+                      return LinearProgressIndicator(
+                        value: _controller.value,
+                        backgroundColor: CupertinoColors.lightBackgroundGray
+                            .withOpacity(0.3),
+                        color: CupertinoColors.white,
+                        minHeight: 5,
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
