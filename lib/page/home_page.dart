@@ -84,10 +84,7 @@ class _HomePageState extends State<HomePage> {
   Widget _checkableItem(
       bool isChecked, String title, Function(bool?) onCheckChanged) {
     return GestureDetector(
-      onTap: () {
-        onCheckChanged(!isChecked);
-        _hideKeyboard();
-      },
+      onTap: () => onCheckChanged(!isChecked),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
         decoration: BoxDecoration(
@@ -158,7 +155,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _startTouchFish() {
-    _hideKeyboard();
     try {
       int minutes = int.parse(_durationController.text);
       if (_fishOS == FishOS.macos) {
@@ -169,13 +165,6 @@ class _HomePageState extends State<HomePage> {
       setFishDuration(minutes);
     } catch (e) {
       print('start fish error: $e');
-    }
-  }
-
-  void _hideKeyboard() {
-    FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
-      FocusManager.instance.primaryFocus?.unfocus();
     }
   }
 }

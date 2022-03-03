@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:desktop_window/desktop_window.dart';
 
 class DeviceWrapper {
+  static final bool isMobile = Platform.isAndroid || Platform.isIOS;
+
   static final bool isDesktop =
       Platform.isWindows || Platform.isMacOS || Platform.isLinux;
 
